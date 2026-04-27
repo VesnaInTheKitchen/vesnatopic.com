@@ -1,0 +1,332 @@
+/* ─── Hero entrance ─── */
+@keyframes slideUp {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0% 0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-sir,
+.hero-henry,
+.hero-collective {
+  clip-path: inset(0 0 100% 0);
+  animation: slideUp 1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  display: block;
+  will-change: transform, clip-path;
+}
+.hero-henry { animation-delay: 0.12s; }
+.hero-collective { animation-delay: 0.24s; }
+
+.arm {
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+.arm-tl { animation-delay: 0.7s; }
+.arm-tr { animation-delay: 0.85s; }
+.arm-bl { animation-delay: 1s; }
+.arm-br { animation-delay: 1.15s; }
+.arm-mb { animation-delay: 1.3s; }
+
+/* ─── Hero ambient blobs ─── */
+@keyframes drift1 {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(-60px, 80px) scale(1.15); }
+}
+@keyframes drift2 {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(80px, -60px) scale(1.2); }
+}
+@keyframes drift3 {
+  from { transform: translate(0,0); }
+  to   { transform: translate(40px, -40px); }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+.blob-1 {
+  width: 500px; height: 500px;
+  background: oklch(0.35 0.06 32 / 0.25);
+  top: -100px; right: -80px;
+  animation: drift1 18s ease-in-out infinite alternate;
+}
+.blob-2 {
+  width: 400px; height: 400px;
+  background: oklch(0.30 0.05 200 / 0.15);
+  bottom: -80px; left: 0;
+  animation: drift2 22s ease-in-out infinite alternate;
+}
+.blob-3 {
+  width: 300px; height: 300px;
+  background: oklch(0.25 0.03 60 / 0.12);
+  top: 40%; left: 15%;
+  animation: drift3 16s ease-in-out infinite alternate;
+}
+
+/* ─── Hero center text ─── */
+/* Use min(vw, vh) so the stack also shrinks on short viewports
+   and never crowds the scroll hint at the bottom. */
+.hero-sir {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(80px, min(14vw, 22vh), 200px);
+  line-height: 0.85;
+  letter-spacing: 0.04em;
+  color: #e2dcd4;
+}
+.hero-henry {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(100px, min(18vw, 28vh), 260px);
+  line-height: 0.82;
+  letter-spacing: 0.02em;
+  color: #e2dcd4;
+}
+.hero-collective {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(48px, min(8vw, 13vh), 120px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #e2dcd4;
+  margin-top: -8px;
+}
+
+.hero-rule {
+  display: block;
+  width: 1px;
+  height: 0;
+  background: rgba(226,220,212,0.12);
+  margin: 0 auto;
+  transition: height 1s 0.5s ease;
+}
+.hero-rule.visible { height: 40px; }
+
+.hero-sub {
+  margin-top: 28px;
+  margin-bottom: 80px; /* reserve space so the scroll hint never overlaps */
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #8a8078;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 1s 1s, transform 1s 1s;
+}
+.hero-sub.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── SVG diagonal lines ─── */
+.diag-line {
+  stroke: rgba(226,220,212,0.45);
+  stroke-width: 1;
+  fill: none;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.23,1,0.32,1), stroke 0.4s, stroke-width 0.4s;
+  vector-effect: non-scaling-stroke;
+}
+.diag-line.visible { stroke-dashoffset: 0; }
+.diag-line.lit { stroke: rgba(226,220,212,0.9); stroke-width: 1.5; }
+
+/* Hide diagonal lines on small screens — they only make sense with the arms visible */
+@media (max-width: 767px) {
+  .diag-line { display: none; }
+}
+
+/* ─── Arms ─── */
+.arm-pill {
+  font-family: "Inter", sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8a8078;
+  border: 1px solid rgba(226,220,212,0.15);
+  border-radius: 40px;
+  padding: 5px 14px;
+  display: inline-block;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.arm:hover .arm-pill {
+  border-color: rgba(226,220,212,0.5);
+  color: #e2dcd4;
+  background: rgba(226,220,212,0.06);
+}
+
+.arm-title {
+  font-family: "Bebas Neue", sans-serif;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #e2dcd4;
+  transition: color 0.3s, transform 0.4s cubic-bezier(0.23,1,0.32,1);
+}
+.arm-sub {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  color: #8a8078;
+  transition: color 0.3s;
+}
+.arm:hover .arm-title {
+  color: oklch(0.62 0.10 32);
+  transform: scale(1.04);
+}
+
+.arm-arrow {
+  font-family: "Inter", sans-serif;
+  display: inline-block;
+  transition: transform 0.4s, color 0.3s;
+}
+.arm:hover .arm-arrow {
+  color: oklch(0.62 0.10 32);
+  transform: translate(4px, -2px);
+}
+.arm-tl .arm-arrow,
+.arm-bl .arm-arrow { transform: scaleX(-1); }
+.arm-tl:hover .arm-arrow,
+.arm-bl:hover .arm-arrow { transform: scaleX(-1) translate(4px, -2px); }
+
+/* ─── Scroll hint ─── */
+@keyframes scrollDown {
+  0%   { top: -50%; }
+  100% { top: 150%; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.scroll-hint {
+  opacity: 0;
+  animation: fadeUp 1s 2s forwards;
+}
+.scroll-track {
+  width: 1px;
+  height: 40px;
+  background: rgba(226,220,212,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-track::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #8a8078;
+  animation: scrollDown 2s ease-in-out 2.5s infinite;
+}
+
+/* ─── Nav ─── */
+.nav-link {
+  transition: color 0.3s;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #e2dcd4;
+  transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.nav-link:hover { color: #e2dcd4; }
+.nav-link:hover::after { width: 100%; }
+
+/* ─── Marquee ─── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+.marquee-item {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 15px;
+  color: #8a8078;
+  letter-spacing: 0.1em;
+  padding: 0 40px;
+  border-right: 1px solid rgba(226,220,212,0.12);
+}
+
+/* ─── Grain overlay ─── */
+.grain {
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ─── Custom cursor ─── */
+.cursor-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: #e2dcd4;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width 0.3s, height 0.3s, background 0.3s, opacity 0.3s;
+  mix-blend-mode: difference;
+  top: 0; left: 0;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(226,220,212,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width 0.5s cubic-bezier(0.23,1,0.32,1),
+              height 0.5s cubic-bezier(0.23,1,0.32,1),
+              border-color 0.3s;
+  mix-blend-mode: difference;
+  top: 0; left: 0;
+}
+body.hovering .cursor-ring {
+  width: 60px; height: 60px;
+  border-color: rgba(226,220,212,0.7);
+}
+
+/* ─── Hero vignette ─── */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(13,11,10,0.7) 100%);
+  pointer-events: none;
+}
+
+/* ─── Reveal on scroll ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s cubic-bezier(0.23,1,0.32,1),
+              transform 0.9s cubic-bezier(0.23,1,0.32,1);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.35s; }
+
+/* Legacy — kept for any leftover usage */
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-rise { animation: fade-rise 0.8s ease-out both; }
+.animate-fade-rise-delay { animation: fade-rise 0.8s ease-out 0.2s both; }
+.animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
