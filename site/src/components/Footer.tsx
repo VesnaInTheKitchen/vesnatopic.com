@@ -41,6 +41,10 @@ export default function Footer() {
           <br />
           <br />
           © 2026
+          <br />
+          <a href="/disclaimer.html" className="hover:text-foreground">
+            Disclaimer
+          </a>
         </div>
       </div>
     </footer>
