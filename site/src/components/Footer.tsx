@@ -19,13 +19,12 @@ export default function Footer() {
           collective
         </div>
         <div
-          className="uppercase text-muted"
+          className="uppercase text-muted text-left md:text-right"
           style={{
             fontFamily: "Inter, sans-serif",
             fontSize: "10px",
             letterSpacing: "0.25em",
             lineHeight: 2,
-            textAlign: "right",
           }}
         >
           vesnatopic.com
