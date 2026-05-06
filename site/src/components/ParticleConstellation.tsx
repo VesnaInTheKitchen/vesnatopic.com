@@ -34,7 +34,9 @@ export default function ParticleConstellation() {
     resize();
     window.addEventListener("resize", resize);
 
-    const pts: Pt[] = Array.from({ length: 90 }, () => ({
+    const isMobile = window.innerWidth < 768;
+    const pointCount = isMobile ? 38 : 90;
+    const pts: Pt[] = Array.from({ length: pointCount }, () => ({
       x: Math.random(),
       y: Math.random(),
       vx: (Math.random() - 0.5) * 0.00018,
@@ -52,9 +54,10 @@ export default function ParticleConstellation() {
       pts.push({ x: a.x, y: a.y, vx: 0, vy: 0, r: 2.8, anchor: true }),
     );
 
-    const CONNECT_DIST = 0.22;
+    const CONNECT_DIST = isMobile ? 0.16 : 0.22;
     const ATTRACT_DIST = 0.18;
     const ATTRACT_K = 0.000012;
+    const LINE_ALPHA = isMobile ? 0.22 : 0.32;
 
     let mx = -1;
     let my = -1;
@@ -113,7 +116,7 @@ export default function ParticleConstellation() {
             ctx.beginPath();
             ctx.moveTo(pts[i].x * W, pts[i].y * H);
             ctx.lineTo(pts[j].x * W, pts[j].y * H);
-            ctx.strokeStyle = `rgba(226,220,212,${(1 - dist / CONNECT_DIST) * 0.32})`;
+            ctx.strokeStyle = `rgba(226,220,212,${(1 - dist / CONNECT_DIST) * LINE_ALPHA})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
