@@ -5,7 +5,7 @@ export default function MenuBuilderSection() {
     <Section
       id="menu-builder"
       number="04"
-      eyebrow="Binnenkort"
+      eyebrow="Live"
       title="Menu Builder"
       bg="bg2"
     >
@@ -21,12 +21,12 @@ export default function MenuBuilderSection() {
         className="text-muted"
         style={{ fontSize: "16px", lineHeight: 1.8, marginBottom: "32px", maxWidth: "480px" }}
       >
-        Op dit moment in ontwikkeling. Geïnteresseerd in early-access? Stuur
-        een berichtje en ik laat het weten zodra het live staat.
+        Nu live. Bekijk het huidige weekmenu of blader door eerdere weken.
       </p>
 
-      <div
-        className="reveal inline-flex items-center gap-3 text-foreground"
+      <a
+        href="https://menu.vesnatopic.com"
+        className="reveal inline-flex items-center gap-3 text-foreground no-underline"
         style={{
           border: "1px solid rgba(226,220,212,0.3)",
           borderRadius: "40px",
@@ -35,6 +35,7 @@ export default function MenuBuilderSection() {
           letterSpacing: "0.25em",
           textTransform: "uppercase",
           fontFamily: "Inter, sans-serif",
+          transition: "border-color .2s, color .2s",
         }}
       >
         <span
@@ -46,8 +47,8 @@ export default function MenuBuilderSection() {
             background: "oklch(0.62 0.10 32)",
           }}
         />
-        In ontwikkeling
-      </div>
+        Bekijk de menu builder →
+      </a>
     </Section>
   );
 }

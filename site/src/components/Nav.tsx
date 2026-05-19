@@ -2,7 +2,7 @@ const MENU_ITEMS = [
   { label: "Catering", href: "#catering" },
   { label: "Studio", href: "#studio" },
   { label: "Vesna in the Kitchen", href: "#kitchen" },
-  { label: "Menu Builder", href: "#menu-builder" },
+  { label: "Menu Builder", href: "https://menu.vesnatopic.com" },
   { label: "Contact", href: "#contact" },
 ];
 
