@@ -20,3 +20,8 @@ dist-ssr/
 /*.jpg
 /*.jpeg
 /*.png
+
+# Working folders at repo root — source assets + design handoff materials,
+# never bundled by Vite (the live site only reads from site/).
+/images/
+/design_handoff_vesnatopic/
