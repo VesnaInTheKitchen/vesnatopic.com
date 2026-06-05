@@ -48,13 +48,12 @@ const ARMS: Arm[] = [
   },
   {
     key: "mb",
-    pill: "Binnenkort",
+    pill: "Live",
     titleLines: ["Menu", "Builder"],
-    sub: "Binnenkort live",
-    href: "#menu-builder",
+    sub: "Plan je weekmenu",
+    href: "https://menu.vesnatopic.com",
     titleSize: "clamp(18px, 1.8vw, 28px)",
     subSize: "clamp(11px, 1.1vw, 16px)",
-    dim: true,
   },
 ];
 
